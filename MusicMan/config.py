@@ -5,7 +5,6 @@
 # it under the terms of the GNU Affero General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
-
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -14,9 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # Modified by Inukaasith
-
-from os import getenv
 import os
+from os import getenv
+
 from dotenv import load_dotenv
 
 if os.path.exists("local.env"):
@@ -27,7 +26,8 @@ SESSION_NAME = getenv("SESSION_NAME", "session")
 BOT_TOKEN = getenv("BOT_TOKEN")
 BOT_NAME = getenv("BOT_NAME")
 UPDATES_CHANNEL = getenv("UPDATES_CHANNEL", "Lunatic0de")
-BG_IMAGE = getenv("BG_IMAGE", "https://telegra.ph/file/cd0b87484429704c7b935.png")
+BG_IMAGE = getenv("BG_IMAGE",
+                  "https://telegra.ph/file/67ea2eb77643ae800e10b.jpg")
 admins = {}
 API_ID = int(getenv("API_ID", ""))
 API_HASH = getenv("API_HASH")
