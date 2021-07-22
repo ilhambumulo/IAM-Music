@@ -40,13 +40,13 @@ async def pause(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("Is chat even linked")
+      await message.reply("**Apakah obrolan terhubung?**")
       return    
     chat_id = chid
     if (chat_id not in callsmusic.active_chats) or (
         callsmusic.active_chats[chat_id] == "paused"
     ):
-        await message.reply_text("❗ Nothing is playing!")
+        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
     else:
         callsmusic.pause(chat_id)
         await message.reply_text("▶️ Paused!")
@@ -61,7 +61,7 @@ async def resume(_, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("Is chat even linked")
+      await message.reply("**Apakah obrolan terhubung?**")
       return    
     chat_id = chid
     if (chat_id not in callsmusic.active_chats) or (
@@ -86,7 +86,7 @@ async def stop(_, message: Message):
       return    
     chat_id = chid
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ Nothing is streaming!")
+        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
     else:
         try:
             queues.clear(chat_id)
@@ -94,7 +94,7 @@ async def stop(_, message: Message):
             pass
 
         await callsmusic.stop(chat_id)
-        await message.reply_text("❌ Stopped streaming!")
+        await message.reply_text("❌ **Memberhentikan Lagu!**")
 
 
 @Client.on_message(filters.command(["channelskip","cskip"]) & filters.group & ~filters.edited)
@@ -111,7 +111,7 @@ async def skip(_, message: Message):
       return    
     chat_id = chid
     if chat_id not in callsmusic.active_chats:
-        await message.reply_text("❗ Nothing is playing to skip!")
+        await message.reply_text("❗ **Tidak ada Lagu Selanjutnya untuk dilewati!**")
     else:
         queues.task_done(chat_id)
 
@@ -128,7 +128,7 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"- Skipped **{skip[0]}**\n- Now Playing **{qeue[0][0]}**")
+    await message.reply_text(f"- **Melewati lagu saat ini!** **{skip[0]}**\n- Sekarang memutar lagu **{qeue[0][0]}**")
 
 
 @Client.on_message(filters.command("channeladmincache"))
@@ -139,7 +139,7 @@ async def admincache(client, message: Message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("Is chat even linked")
+      await message.reply("**Apakah obrolan terhubung?**")
       return
     set(
         chid,
@@ -151,4 +151,4 @@ async def admincache(client, message: Message):
         ),
     )
 
-    await message.reply_text("❇️ Admin cache refreshed!")
+    await message.reply_text("❇️ **Daftar admin** telah **diperbarui** !")
