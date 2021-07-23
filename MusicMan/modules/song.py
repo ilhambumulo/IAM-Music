@@ -74,7 +74,7 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = "**🎵 Uploaded by @Lunatic0de**"
+        rep = "**🎵 Uploaded by @infoiam**"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(dur_arr[i]) * secmul
@@ -377,7 +377,7 @@ async def ytmusic(client, message: Message):
         is_downloading = True
         with youtube_dl.YoutubeDL(opts) as ytdl:
             infoo = ytdl.extract_info(url, False)
-            duration = round(infoo["duration"] / 60)
+            duration = round(infoo["duration"] / 90)
 
             if duration > DURATION_LIMIT:
                 await pablo.edit(
