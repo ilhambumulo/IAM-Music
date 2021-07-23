@@ -22,26 +22,24 @@ import asyncio
 from MusicMan.config import SUDO_USERS
 
 @Client.on_message(filters.command(["gcast"]))
-async def broadcast(_, message: Message):
-    sent=0
-    failed=0
-    if message.from_user.id not in SUDO_USERS:
-        return
-    else:
-        wtf = await message.reply("`Memulai global cast...`")
+async def bye(client, message):
+    if message.from_user.id in SUDO_USERS:
+        lol = await message.reply("`Memulai global cast...`")
         if not message.reply_to_message:
-            await wtf.edit("Tolong balas ke pesan apapun untuk broadcast!")
+            await lol.edit("Tolong balas ke pesan apapun untuk broadcast!")
             return
-        lmao = message.reply_to_message.text
+        msg = message.reply_to_message.text
+        sent=0
+        failed=0
         async for dialog in client.iter_dialogs():
             try:
-                await client.send_message(dialog.chat.id, lmao)
-                sent = sent+1
-                await wtf.edit(f"`global cast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
+                await client.send_message(dialog.chat.id, msg)
+                sent += 1
+                await lol.edit(f"`global cast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
                 await asyncio.sleep(3)
             except:
-                failed=failed+1
-                #await wtf.edit(f"`Melakukan gcast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
-                
-            
+                failed += 1
+                await lol.edit(f"`Melakukan gcast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
+                await asyncio.sleep(0.7)
+
         await message.reply_text(f"`gcast berhasil ` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
