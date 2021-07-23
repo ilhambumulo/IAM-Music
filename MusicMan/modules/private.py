@@ -39,18 +39,14 @@ logging.basicConfig(level=logging.INFO)
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Haii {message.from_user.first_name} saya adalah {PROJECT_NAME} ┏┛\n
-Saya Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Dengan cara yang Mudah
-Saya Memiliki Banyak Fitur Praktis Seperti :
-┏━━━━━━━━━━━━━━
-┣• Memutar Musik.
-┣• Mendownload Lagu.
-┣• Mencari Lagu Yang ingin di Putar atau di Download.
-┣• Gunakan Perintah » /help « untuk Mengetahui Fitur Lengkap saya
-┗━━━━━━━━━━━━━━
-❃ Managed With ❤ By {OWNER}
-❃ Thanks To [Risman](https://t.me/mrismanaziz)
-━━━━━━━━━━━━━━━
+        f"""<b>Haii {message.from_user.first_name} saya adalah {PROJECT_NAME}\n
+Saya Adalah Bot Music Group, Yang dapat Memutar Lagu di Voice Chat Group Anda Dengan Mudah
+Saya Memiliki Banyak Fitur Seperti :
+• Memutar Musik.
+• Mendownload Lagu.
+• Mencari Lagu Yang ingin di Putar atau di Download.
+• Gunakan Perintah » /help « untuk Mengetahui Fitur Lengkapnya
+📌 Special Thanks To : {OWNER}
 Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
 </b>""",
 
@@ -69,7 +65,7 @@ Ingin Menambahkan Saya ke Grup Anda? Tambahkan Saya Ke Group Anda!
                         "⛑ Group Support", url=f"https://t.me/{SUPPORT_GROUP}")
                 ],[
                     InlineKeyboardButton(
-                        "🛠 Source Code 🛠", url=f"https://{SOURCE_CODE}")
+                        "📷 Instagram", url=f"https://instagram.com/ilhambumulo_")
                 ]
             ]
         ),
@@ -125,7 +121,7 @@ def map(pos):
             ],
             [
                 InlineKeyboardButton(
-                    text='🛠 Source Code 🛠', url=f"https://{SOURCE_CODE}"
+                    text='🎁 Donate', url=f"https://t.me/iamnibng"
                 )
             ],
             [InlineKeyboardButton(text='«', callback_data=f"help+{pos-1}")],
@@ -171,10 +167,31 @@ async def ghelp(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "📜 Cara Menggunakan BOT 📜", url=f"https://t.me/{BOT_USERNAME}?start"
+                        "📜 Cara Menggunakan BOT 📜", url=f"https://t.me/infoiam/3"
                     )
                 ]
             ]
         ),
     )
 
+
+@Client.on_message(
+    filters.command("reload")
+    & filters.group
+    & ~ filters.edited
+)
+async def reload(client: Client, message: Message):
+    await message.reply_text("""✅ Bot **berhasil dimulai ulang!**\n\n• **Daftar admin** telah **diperbarui**""",
+      reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Channel Support", url=f"https://t.me/infoiam"
+                    ),
+                    InlineKeyboardButton(
+                        "Created By", url=f"https://t.me/iamnibng"
+                    )
+                ]
+            ]
+        )
+   )
