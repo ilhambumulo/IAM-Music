@@ -15,31 +15,28 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from pyrogram import Client
-from pyrogram import filters
+from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant
 import asyncio
 from MusicMan.config import SUDO_USERS
 
 @Client.on_message(filters.command(["gcast"]))
 async def bye(client, message):
+    sent=0
+    failed=0
     if message.from_user.id in SUDO_USERS:
         lol = await message.reply("`Memulai global cast...`")
         if not message.reply_to_message:
             await lol.edit("Tolong balas ke pesan apapun untuk broadcast!")
             return
         msg = message.reply_to_message.text
-        sent=0
-        failed=0
         async for dialog in client.iter_dialogs():
             try:
                 await client.send_message(dialog.chat.id, msg)
-                sent += 1
+                sent = sent+1
                 await lol.edit(f"`global cast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
-                await asyncio.sleep(3)
             except:
-                failed += 1
+                failed = failed+1
                 await lol.edit(f"`Melakukan gcast...` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
-                await asyncio.sleep(0.7)
-
+            await asyncio.sleep(3)
         await message.reply_text(f"`gcast berhasil ` \n\n**Mengirim ke:** `{sent}` Chats \n**gagal di:** {failed} Chats")
